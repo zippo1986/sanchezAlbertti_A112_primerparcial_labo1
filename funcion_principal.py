@@ -97,7 +97,7 @@ def main ():
                     lista_comedias = filtrar_datos(lista_peliculas, "comedia", "genero")
                     guardar_csv_dos("comedias.csv",lista_comedias)
             case "6":
-                if not bandera_genero and bandera_rating:
+                if not bandera_genero and not bandera_rating:
                     mostrar_mensaje("No se puede realizare el ordenamiento sin asignar genero y rating")
                     
                 else:
@@ -105,12 +105,14 @@ def main ():
                     mostrar_peliculas(lista_peliculas)
                     
             case "7":
-                if bandera_rating:
+                if not bandera_rating:
+                    mostrar_mensaje("No se puede realizar la operacion sin cargar los ratings")
+                else:     
                     peliculas_max_rating = calcular_maximo_dos(lista_peliculas,"rating")
                     mostrar_titulo_rating(peliculas_max_rating,"titulo","rating")
                     bandera_peliculas_max_rat= True
-                else:
-                    mostrar_mensaje("No se puede realizar la operacion sin cargar el rating")
+            
+            
             case "8":
                 if bandera_peliculas_max_rat:
                     guardar_json_rating(peliculas_max_rating, "peliculas_max_rat.json")
